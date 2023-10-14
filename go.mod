@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/coredns/caddy v1.1.1
 	github.com/coredns/coredns v1.10.1
-	github.com/miekg/dns v1.1.50
+	github.com/miekg/dns v1.1.56
 	github.com/pkg/errors v0.9.1
 	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b
 )
@@ -24,11 +24,11 @@ require (
 	github.com/prometheus/common v0.39.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
-	golang.org/x/mod v0.11.0 // indirect
-	golang.org/x/net v0.4.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/text v0.5.0 // indirect
-	golang.org/x/tools v0.4.0 // indirect
+	golang.org/x/mod v0.12.0 // indirect
+	golang.org/x/net v0.15.0 // indirect
+	golang.org/x/sys v0.12.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/tools v0.13.0 // indirect
 	google.golang.org/genproto v0.0.0-20221227171554-f9683d7f8bef // indirect
 	google.golang.org/grpc v1.52.3 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
