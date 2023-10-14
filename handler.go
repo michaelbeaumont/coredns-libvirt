@@ -14,8 +14,20 @@ import (
 )
 
 type handler struct {
-	ttl  uint32
-	Next plugin.Handler
+	ttl   uint32
+	rules []subnetRules
+	Next  plugin.Handler
+}
+
+type ruleKind int
+
+const (
+	keep ruleKind = iota
+)
+
+type subnetRules struct {
+	kind ruleKind
+	cidr net.IPNet
 }
 
 var _ plugin.Handler = handler{}
@@ -48,6 +60,20 @@ func (h handler) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 	// Only if we have _no_ IPs at all of any family do we go to the next plugin
 	if len(ips) == 0 {
 		return plugin.NextOrFailure(pluginName, h.Next, ctx, w, r)
+	}
+
+	if len(h.rules) > 0 {
+		ips = slices.DeleteFunc(ips, func(ip net.IP) bool {
+			for _, rule := range h.rules {
+				switch rule.kind {
+				case keep:
+					if rule.cidr.Contains(ip) {
+						return false
+					}
+				}
+			}
+			return true
+		})
 	}
 
 	var answer []dns.RR
