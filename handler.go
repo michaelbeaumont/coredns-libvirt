@@ -3,6 +3,7 @@ package libvirt
 import (
 	"context"
 	"net"
+	"slices"
 	"strings"
 
 	"github.com/coredns/coredns/plugin"
@@ -10,7 +11,6 @@ import (
 	"github.com/coredns/coredns/request"
 	"github.com/miekg/dns"
 	"github.com/pkg/errors"
-	"golang.org/x/exp/slices"
 )
 
 type handler struct {
