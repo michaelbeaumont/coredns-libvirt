@@ -1,6 +1,6 @@
 module github.com/michaelbeaumont/coredns-libvirt
 
-go 1.20
+go 1.21
 
 require (
 	github.com/coredns/caddy v1.1.1
