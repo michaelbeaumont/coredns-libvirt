@@ -58,7 +58,6 @@ func setup(c *caddy.Controller) error {
 	h.rules = rules
 
 	dnsserver.GetConfig(c).AddPlugin(func(next plugin.Handler) plugin.Handler {
-		fmt.Println(rules)
 		h.Next = next
 		return h
 	})
