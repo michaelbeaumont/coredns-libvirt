@@ -14,9 +14,10 @@ import (
 )
 
 type handler struct {
-	ttl   uint32
-	rules []subnetRules
-	Next  plugin.Handler
+	ttl        uint32
+	trimSuffix string
+	rules      []subnetRules
+	Next       plugin.Handler
 }
 
 type ruleKind int
@@ -42,7 +43,12 @@ func (h handler) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg)
 		return plugin.NextOrFailure(pluginName, h.Next, ctx, w, r)
 	}
 
-	vmName := strings.TrimSuffix(state.QName(), ".")
+	var suffix = "."
+	if h.trimSuffix != "" {
+		suffix = "." + h.trimSuffix + "."
+	}
+
+	vmName := strings.TrimSuffix(state.QName(), suffix)
 
 	var ips []net.IP
 	switch state.QType() {
